@@ -1,11 +1,11 @@
 {
     "id": "43AAF05D",
-    "path": null,
-    "project_path": null,
+    "path": "C:/R3/rso22/p89_paste_excel_csv.R",
+    "project_path": "p89_paste_excel_csv.R",
     "type": "r_source",
     "hash": "19213622",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1662801497393.0,
     "source_on_save": false,
     "relative_order": 3,
@@ -17,11 +17,11 @@
         "scrollLine": "16"
     },
     "folds": "",
-    "lastKnownWriteTime": 1662801493,
-    "encoding": "",
+    "lastKnownWriteTime": 1662804704,
+    "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1662804350381,
+    "last_content_update": 1662804704707,
     "read_only": false,
     "read_only_alternatives": []
 }
