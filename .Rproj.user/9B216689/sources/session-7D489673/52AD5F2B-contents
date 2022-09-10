@@ -70,3 +70,36 @@ df
 df$var_mean <- (df$var1+df$var2)/2
 df
 
+#mpg 통합 연비 변수 만들기
+df_car <- as.data.frame(ggplot2::mpg)
+df_car
+
+#도로 유형을 통합한 연비변수 생성
+df_car$total = (df_car$cty + df_car$hwy) / 2
+head(df_car)
+
+#고연비 합격 판정을 받은 자동차
+summary(df_car$total)
+
+#히스토그램을 그려 연비분포 확인
+hist(df_car$total)
+
+#조건문 작성
+df_car$test <- ifelse(df_car$total >= 20, "pass", "fail")
+head(df_car,20)
+
+#빈도표를 작성해 합격 판정 자동차 수 알아보기
+table(df_car$test)
+
+#막대그래프로 빈도 표현하기
+qplot(df_car$test)
+
+#중첩 조건문 만들기
+df_car$grade <- ifelse(df_car$total >= 30,  "A",ifelse(df_car$total >= 20 ,"B","C"))
+df_car
+
+df_table_grade <-table(df_car$grade)
+df_table_grade
+
+#막대그래프 생성 (grade)
+qplot(df_car$grade)
