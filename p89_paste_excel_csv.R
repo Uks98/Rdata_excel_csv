@@ -34,3 +34,4 @@ df_modterm
 
 # file 파라미터에 파일명
 write.csv(df_modterm, file = "df_midterm.csv")
+
