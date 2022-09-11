@@ -83,3 +83,17 @@ exam %>%
   select(id,math) %>%
   head
 
+#실습
+mpg_cl <- mpg %>% select(class,cty)
+head(mpg_cl)
+
+mpg_suv_mean <- mpg_cl %>% 
+  filter(class == "suv") %>% 
+  head()
+
+mpg_compact_mean <- mpg_cl %>% 
+  filter(class == "compact") %>% 
+head()
+mean(mpg_cl_mean$cty)
+mean(mpg_compact_mean$cty)
+  
