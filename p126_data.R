@@ -96,4 +96,27 @@ mpg_compact_mean <- mpg_cl %>%
 head()
 mean(mpg_cl_mean$cty)
 mean(mpg_compact_mean$cty)
-  
+
+#오름차순 정렬 수학점수가 낮은사람부터 높은사람까지
+exam %>% arrange(math)
+
+#내림차순 정렬
+exam %>% arrange(desc(math))
+
+#여러 항목 정렬
+exam %>% arrange(class,math)
+
+audi_hwy <- mpg %>% filter(manufacturer == "audi")
+audi_hwy %>% arrange(desc(audi_hwy$hwy)) %>% head(5)
+
+#파생변수 만들어보기
+exam %>% mutate(total = math + english + science)
+
+#파생변수 한번에 추가하기
+exam %>% mutate(total = math + english + science,mean = (math + english + science)/3) 
+
+
+
+
+
+
