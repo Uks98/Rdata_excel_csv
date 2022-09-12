@@ -113,10 +113,72 @@ audi_hwy %>% arrange(desc(audi_hwy$hwy)) %>% head(5)
 exam %>% mutate(total = math + english + science)
 
 #파생변수 한번에 추가하기
-exam %>% mutate(total = math + english + science,mean = (math + english + science)/3) 
+exam %>% mutate(total = math + english + science,
+                mean = (math + english + science)/3) %>% 
+  head
 
+#파생변수에 조건문 추가
+exam %>% mutate(isPass = ifelse(science >= 60, "pass","fail"))
 
+exam %>% mutate(total = science + math + english) %>% 
+  arrange(desc(total)) %>% 
+  head()
 
+#문제풀어보기 
+#mpg 데이터 복사본을 만들고 합산연비변수 추가
 
+mpg_mutate <- as.data.frame(ggplot2::mpg)
+mpg1 <- mpg_mutate
+mpg1
 
+mpg1 <- mpg1 %>% mutate(hwy2 = cty + hwy) %>% 
+  head
+
+#합산 연비 변수를 2로 나눠 평균 연비 변수추가
+mpg1 <- mpg1 %>% mutate(mean = hwy2/2) %>% 
+  head
+
+#평균 연비 변수가 가장 높은 자동차 3종 데이터 출력
+mpg1 %>% arrange(desc(mean)) %>% 
+  head(3)
+
+#위에 사항을 하나의 dplyr구문으로 작성해보기
+mpg_mutate <- mpg_mutate %>% mutate(total = cty + hwy,mean = total/2) %>% 
+  arrange(desc(mean)) %>% 
+  head(3)
+mpg_mutate
+
+#집단별로 요약하기
+# group_by로 변수 항목별로 분리한 후 summarise사용
+exam %>% summarise(mean_math = mean(math))
+
+exam %>% group_by(class) %>% 
+  summarise(math_mean = mean(math))
+
+#요약 통계량 한번에 산출하기
+#n을 사용해서 각 반에 몇명이 있는지 알 수있음.
+exam %>% group_by(class) %>% 
+  summarise(mean_math = mean(math),sum_math = sum(math),median_math = median(math),n = n()) %>% 
+  arrange(desc(mean_math))
+
+#회사별로 집단을 나눈 후 다시 구동 방식별로 나눠 도시 연비 평균을 구하자
+mpg %>% group_by(manufacturer,drv) %>% #회사별 구동 방식 별 분리
+  summarise(mean_cty = mean(cty)) %>% #cty 평균 산출
+  head(10)
+
+#회사별로 suv 자동차의 도시 및 고속도로 통합연비 평균을 구해 내림차순으로 정렬한 후 1~5위까지 정렬하기
+mpg %>% 
+  group_by(manufacturer) %>% 
+  filter(class == "suv") %>% mutate(total_hw = (hwy + cty)/2) %>% 
+  summarise(total_mean = mean(total_hw)) %>% 
+  arrange(desc(total_mean)) %>% 
+  head(5)
+
+#실습해보기
+
+#어떤 차종의 도시 연비가 높은지 비교해보려한다. calss별 cty평균을 구해보세요,
+
+mpg %>%
+  group_by(class) %>% 
+  summarise(cty_mean = mean(cty))
 
